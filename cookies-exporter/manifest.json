@@ -1,0 +1,12 @@
+{
+	"name": "Cookies Exporter",
+	"description": "Exports your cookies super fast in a format compatible with wget",
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_popup": "scripts/popup.html",
+		"default_title": "Export cookies.txt"
+	},
+	"manifest_version": 2,
+	"permissions": [ "activeTab", "cookies", "tabs", "webNavigation", "http://*/*", "https://*/*" ],
+	"version": "1.0.0"
+}

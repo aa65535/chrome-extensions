@@ -1,0 +1,16 @@
+{
+	"name": "Change Request Header",
+	"description": "Change Request Header",
+	"version": "1.0.5",
+	"permissions": [ "<all_urls>", "tabs", "webRequestBlocking", "webRequest" ],
+	"manifest_version": 2,
+	"icons": {
+		"16": "./icons/icon16.png",
+		"32": "./icons/icon32.png",
+		"48": "./icons/icon48.png"
+	},
+	"background": {
+		"scripts": ["./script/background.js"],
+		"persistent": true
+	}
+}

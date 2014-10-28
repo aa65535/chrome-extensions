@@ -64,7 +64,7 @@ ModifyHeader.prototype = {
 		referer: {
 			append: false,
 			domain: [
-				/http:\/\/pan\.baidu\.com\/.*/
+				/https?:\/\/.*\.baidu\.com\/.*/
 			],
 		},
 		forwarded: {

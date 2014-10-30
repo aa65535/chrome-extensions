@@ -1,7 +1,7 @@
 {
-	"name": "百度盘-404",
-	"description": "解除百度网盘的搜索引擎屏蔽",
-	"version": "1.0.0",
+	"name": "Baidu-404",
+	"description": "解除百度部分产品对搜索引擎的屏蔽",
+	"version": "1.0.1",
 	"permissions": [ "<all_urls>", "tabs", "webRequestBlocking", "webRequest" ],
 	"manifest_version": 2,
 	"icons": {

@@ -1,7 +1,7 @@
 function modifyHeader(headers, url) {
     var i, len, reg, Request = {};
 
-    reg = /http:\/\/pan\.baidu\.com\/.*/;
+    reg = /http:\/\/.*\.baidu\.com\/.*/;
 
     if (reg.test(url)) {
         len = headers.length;

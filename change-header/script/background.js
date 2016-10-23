@@ -1,14 +1,16 @@
 function ModifyHeader(headers, url) {
-	var i, o, len, Request = {};
+	var i, o, reg, len, Request = {};
 
 	o = this;
 	len = headers.length;
 
 	for (i = 0; i < len; i++) {
 		// console.log(headers[i].name + ': ' + headers[i].value);
-		if (headers[i].name == 'Referer' &&
-			o.inDomain(o.settings.referer.domain, url)) {
-			headers[i].value = url;
+		if (headers[i].name == 'Referer') {
+			reg = o.indexOf(o.settings.referer.domain, url);
+			if (reg && !reg.test(headers[i].value)) {
+				headers[i].value = url;
+			}
 		}
 
 		if (headers[i].name == 'X-Forwarded-For') {
@@ -20,13 +22,13 @@ function ModifyHeader(headers, url) {
 	if (o.settings.referer.append) {
 		headers[len] = {
 			name: 'Referer',
-			value: url,
+			value: (new URL(url)).origin,
 		};
 		len++;
 	}
 
 	if (o.settings.forwarded.append &&
-		o.inDomain(o.settings.forwarded.domain, url)) {
+		o.indexOf(o.settings.forwarded.domain, url)) {
 		headers[len] = {
 			name: 'X-Forwarded-For',
 			value: o.randIp(),
@@ -51,13 +53,13 @@ ModifyHeader.prototype = {
 		].join('.');
 	},
 
-	inDomain: function(reg, url) {
+	indexOf: function(reg, url) {
 		for (var i in reg) {
 			if (reg[i].test(url)) {
-				return true;
+				return reg[i];
 			}
 		}
-		return false;
+		return null;
 	},
 
 	settings: {
@@ -70,7 +72,6 @@ ModifyHeader.prototype = {
 		forwarded: {
 			append: true,
 			domain: [
-				/https?:\/\/www\.re\/.*/,
 				/https?:\/\/.+\.pcbeta\.com\/.*/
 			],
 		},

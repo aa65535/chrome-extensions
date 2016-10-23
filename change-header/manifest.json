@@ -1,7 +1,7 @@
 {
 	"name": "Change Request Header",
 	"description": "Change Request Header",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"permissions": [ "<all_urls>", "tabs", "webRequestBlocking", "webRequest" ],
 	"manifest_version": 2,
 	"icons": {

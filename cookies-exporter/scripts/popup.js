@@ -23,7 +23,7 @@ chrome.tabs.getSelected(null, function(tab) {
 				'# This content may be pasted into a cookies.txt file and used by wget or curl',
 				'# Example:  wget -x <b>--load-cookies cookies.txt</b> ' + htmlspecialchars(tab.url),
 				'# Example:  curl <b>-b cookies.txt</b> ' + htmlspecialchars(tab.url),
-				'#'].join('\n');
+				'#', ''].join('\n');
 			document.write(
 				'<pre>'
 				+ comment.replace(

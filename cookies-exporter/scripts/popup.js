@@ -2,11 +2,6 @@ chrome.tabs.getSelected(null, function(tab) {
 	var domain = tab.url.match(/:\/\/([^\/]+)/)[1];
 	chrome.cookies.getAll({url: tab.url}, function(cookies) {
 		var i, comment, content = '';
-		comment = '# Cookies for domains related to <b>' + domain + '</b>.\n'
-			+ '# This content may be pasted into a cookies.txt file and used by wget or curl\n'
-			+ '# Example:  wget -x <b>--load-cookies cookies.txt</b> ' + htmlspecialchars(tab.url) + '\n'
-			+ '# Example:  curl <b>-b cookies.txt</b> ' + htmlspecialchars(tab.url) + '\n'
-			+ '#\n';
 		for (i in cookies) {
 			if (!cookies.hasOwnProperty(i)) {
 				continue;
@@ -24,6 +19,11 @@ chrome.tabs.getSelected(null, function(tab) {
 		if (!content) {
 			document.write('<pre><b>This site has no cookies.</b></pre>');
 		} else {
+			comment = ['# Cookies for domains related to <b>' + domain + '</b>.',
+				'# This content may be pasted into a cookies.txt file and used by wget or curl',
+				'# Example:  wget -x <b>--load-cookies cookies.txt</b> ' + htmlspecialchars(tab.url),
+				'# Example:  curl <b>-b cookies.txt</b> ' + htmlspecialchars(tab.url),
+				'#'].join('\n');
 			document.write(
 				'<pre>'
 				+ comment.replace(
@@ -32,7 +32,8 @@ chrome.tabs.getSelected(null, function(tab) {
 						+ window.btoa(comment.replace(/<\/?b>/g, '') + content)
 						+ '" download="cookies.txt">cookies.txt</a>'
 				)
-				+ htmlspecialchars(content) + '</pre>'
+				+ htmlspecialchars(content)
+				+ '</pre>'
 			);
 		}
 	});

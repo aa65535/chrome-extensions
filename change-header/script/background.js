@@ -9,8 +9,9 @@ function ModifyHeader(headers, url) {
 		if (headers[i].name == 'Referer') {
 			reg = o.indexOf(o.settings.referer.domain, url);
 			if (reg && !reg.test(headers[i].value)) {
-				headers[i].value = url;
+				headers[i].value = (new URL(url)).origin;
 			}
+			o.settings.referer.append = false;
 		}
 
 		if (headers[i].name == 'X-Forwarded-For') {
@@ -53,10 +54,10 @@ ModifyHeader.prototype = {
 		].join('.');
 	},
 
-	indexOf: function(reg, url) {
-		for (var i in reg) {
-			if (reg[i].test(url)) {
-				return reg[i];
+	indexOf: function(regs, url) {
+		for (var i in regs) {
+			if (regs[i].test(url)) {
+				return regs[i];
 			}
 		}
 		return null;
